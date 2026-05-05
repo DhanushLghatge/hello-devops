@@ -4,16 +4,61 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  DB_PASSWORD: "12345"
+
 stages:
+
+# ------------------ BUILD STAGE ------------------
 - stage: Build
+  displayName: "Build Stage"
   jobs:
   - job: BuildJob
+    displayName: "Build Job"
     steps:
-    - script: echo "Building application..."
 
+    - script: echo "📦 Starting Build Process..."
+      displayName: "Start Build"
+
+    # Simulated Maven Build (safe for your environment)
+    - script: |
+        echo "Running Maven Build..."
+        echo "mvn clean install"
+      displayName: "Maven Build"
+
+    # Simulated Artifact Creation
+    - script: |
+        echo "Creating artifact..."
+        mkdir output
+        echo "Sample build file" > output/app.txt
+      displayName: "Create Artifact"
+
+    - script: echo "✅ Build Completed Successfully"
+      displayName: "Build Complete"
+
+# ------------------ DEPLOY STAGE ------------------
 - stage: Deploy
+  displayName: "Deploy Stage"
+  dependsOn: Build
   jobs:
   - job: DeployJob
+    displayName: "Deploy Job"
     steps:
-    - script: echo "Deploying application..."
-    - script: echo "App deployed successfully 🚀"
+
+    - script: echo "🚀 Starting Deployment..."
+      displayName: "Start Deployment"
+
+    # Simulated Deployment
+    - script: |
+        echo "Deploying application to server..."
+        echo "Artifact deployed successfully"
+      displayName: "Deploy Application"
+
+    # Using Secret (Key Vault simulation)
+    - script: |
+        echo "Using secret variable..."
+        echo "DB_PASSWORD = $(DB_PASSWORD)"
+      displayName: "Use Secret"
+
+    - script: echo "🎉 Deployment Completed Successfully"
+      displayName: "Deployment Complete"
