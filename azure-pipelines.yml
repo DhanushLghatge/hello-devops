@@ -4,6 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+# 🔐 VARIABLES (Key Vault simulation)
 variables:
   DB_PASSWORD: "12345"
 
@@ -20,13 +21,11 @@ stages:
     - script: echo "📦 Starting Build Process..."
       displayName: "Start Build"
 
-    # Simulated Maven Build (safe for your environment)
     - script: |
         echo "Running Maven Build..."
         echo "mvn clean install"
       displayName: "Maven Build"
 
-    # Simulated Artifact Creation
     - script: |
         echo "Creating artifact..."
         mkdir output
@@ -48,13 +47,12 @@ stages:
     - script: echo "🚀 Starting Deployment..."
       displayName: "Start Deployment"
 
-    # Simulated Deployment
     - script: |
         echo "Deploying application to server..."
         echo "Artifact deployed successfully"
       displayName: "Deploy Application"
 
-    # Using Secret (Key Vault simulation)
+    # 🔐 Using Variable
     - script: |
         echo "Using secret variable..."
         echo "DB_PASSWORD = $(DB_PASSWORD)"
